@@ -45,7 +45,7 @@ export default function Login() {
             <form action="#" method="POST" className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Mobile No
+                Username
                 </label>
                 <div className="mt-2">
                   <input
@@ -87,7 +87,8 @@ export default function Login() {
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Login
+                  <a href="/" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                  Login</a>
                 </button>
               </div>
             </form>

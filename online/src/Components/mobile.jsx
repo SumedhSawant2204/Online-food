@@ -99,12 +99,13 @@ const FoodCards = () => {
               className="snap-center w-96 flex-shrink-0 rounded-lg overflow-hidden shadow-md relative bg-white flex"
             >
               <img className="w-32 h-full object-cover" src={service.imageUrl} alt={service.title} />
-              <div className="p-4 flex-grow">
+              <a href='./MenuList'><div className="p-4 flex-grow">
                 <div className="font-bold text-md mb-2 text-gray-800">{service.title}</div>
                 <p className="text-gray-600 text-sm">{service.description}</p>
                 <p className="text-gray-500 text-xs">{service.time}</p>
                 {service.offer && <p className="text-green-600 text-sm font-bold">{service.offer}</p>}
               </div>
+              </a>
               <button
                 onClick={() => toggleFavorite(service.id)}
                 className={`absolute top-2 right-2 p-1 rounded-full ${favorites.includes(service.id) ? 'bg-red-500 text-white' : 'bg-white text-gray-800'}`}

@@ -121,12 +121,14 @@ const ServiceCards = () => {
             className="w-full sm:w-1/2 md:w-1/3 max-w-sm rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
           >
             <img className="w-full h-48 object-cover" src={service.imageUrl} alt={service.title} />
+            <a href='./ProductListR'>
             <div className="p-4 bg-white">
               <div className="font-bold text-lg md:text-xl mb-2 text-gray-800">{service.title}</div>
               <p className="text-gray-600 text-sm md:text-base">
                 {service.description}
               </p>
             </div>
+            </a>
           </div>
         ))}
       </div>

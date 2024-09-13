@@ -170,7 +170,7 @@ export default function Signup() {
     e.preventDefault();
     // Handle signup logic here (e.g., form submission, validation, etc.)
     // After successful signup, navigate to the Example page
-    navigate("/example");
+    navigate("/");
   };
 
   return (
