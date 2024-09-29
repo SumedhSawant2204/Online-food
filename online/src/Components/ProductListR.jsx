@@ -212,7 +212,7 @@ const Product = ({ product }) => {
     
     <div key={product.id} className="relative group border rounded-lg overflow-hidden shadow-lg">
       {/* Product Image with reduced size */}
-      <div className="relative overflow-hidden" style={{ height: '180px', width: '100%' }}>
+    <a href='./ClientSidePage'><div className="relative overflow-hidden" style={{ height: '180px', width: '100%' }}>
         <img
           src={product.imageSrc}
           alt={product.imageAlt}
@@ -246,6 +246,7 @@ const Product = ({ product }) => {
         <p className="mt-1 text-sm text-gray-500">{product.category}</p>
         <p className="mt-1 text-sm text-gray-500">{product.location}</p>
       </div>
+      </a>
     </div>
   );
 };

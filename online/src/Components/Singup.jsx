@@ -10,23 +10,38 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
-    username:"",
+    name:"",
     email:"",
     password:"",
   })
   const handleChange = e => {
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
   };
+  
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    try{
-      const res = await axios.post("", inputs)
-      console.log(res)
-    }catch(error){
-      console.log(error)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+   
+      // Creating the object with user inputs
+      const userData = {
+        username: inputs.name,
+        email: inputs.email,
+        password: inputs.password,
+        mobile: inputs.mobile,// assuming OTP is also a part of the form data
+      };
+      console.log(userData)
+      // Sending the userData object in a POST request
+      const res = await axios.post("http://localhost:8000/api/signup", userData);
+      console.log(res.data);
+  
+      // Navigate or show success message after successful signup
+      // navigate("/");
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+    
   
   const handleGetOtp = (e) => {
     e.preventDefault();
@@ -58,7 +73,7 @@ export default function Signup() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSignup} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
                 htmlFor="name"
@@ -177,7 +192,7 @@ export default function Signup() {
           <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?{' '}
             <a
-              href="/Loginform"
+              href="/Login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Sign in
@@ -188,3 +203,6 @@ export default function Signup() {
     </>
   );
 }
+
+
+

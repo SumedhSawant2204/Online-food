@@ -1,5 +1,5 @@
 
-import './App.css';
+
 import Example from './Components/Example';
 import Product1 from './Components/Product1';
 import Bodypage from "./Components/Bodypage";
@@ -26,7 +26,11 @@ import DispatchList from './Components/DispatchList';
 import TrackOrders from './Components/TrackOrders';
 import Delivery from './Components/Delivery';
 import GoogleMapTracking from './Components/GoogleMapTracking';
+import ClientSidePage from './Components/ClientSidePage';
+import MyOrders from './Components/MyOrders';
+import UserTable from './Components/AddList';
 import "./App.css";
+
 
 
 
@@ -53,6 +57,9 @@ function App() {
       <Route path="/DeliveryList" element={<DeliveryList/>}></Route>
       <Route path="/DispatchList" element={<DispatchList/>}></Route>
       <Route path="/TrackOrders" element={<TrackOrders/>}></Route>
+      <Route path="/ClientSidePage" element={<ClientSidePage/>}></Route>
+      <Route path="/MyOrders" element={<MyOrders/>}></Route>
+      <Route path="/AddList" element={<UserTable/>}></Route>
       <Route path="/GoogleMapTracking" element={<GoogleMapTracking/>}></Route>
 
     
