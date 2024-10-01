@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import AdminNav from './AdminNav';
 
 function AddAdmin() {
@@ -13,11 +15,7 @@ function AddAdmin() {
         zipCode: '',
         country: '',
         website: '',
-        socialMedia: {
-            instagram: '',
-            facebook: '',
-            twitter: '',
-        },
+        
         cuisineType: '',
         isVegetarian: false,
         operatingHours: {
@@ -53,26 +51,45 @@ function AddAdmin() {
         termsAccepted: false,
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    const [inputs, setInputs] = useState({
+        name: '',
+        email: '',
+        password: ''
+      });
+      
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setInputs({
+          ...inputs,
+          [name]: value
+        });
+      };
+    
+    
 
-    const handleCheckboxChange = (e) => {
-        const { name, checked } = e.target;
-        setFormData({ ...formData, [name]: checked });
-    };
-
-    const handleFileChange = (e) => {
-        const { name, files } = e.target;
-        setFormData({ ...formData, [name]: files[0] });
-    };
-
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        // Add your form submission logic here
-    };
+        try {
+       
+          // Creating the object with user inputs
+          const userData = {
+            username: inputs.name,
+            email: inputs.email,
+            password: inputs.password,
+            mobile: inputs.mobile,// assuming OTP is also a part of the form data
+          };
+          console.log(userData)
+          // Sending the userData object in a POST request
+          const res = await axios.post("http://localhost:8000/api/AddAdmin", userData);
+          console.log(res.data);
+      
+          // Navigate or show success message after successful signup
+          // navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      };
     
 
     return (
@@ -114,10 +131,7 @@ function AddAdmin() {
                         <option value="Weekends">Weekends</option>
                         <option value="Custom">Custom</option>
                     </select>
-                    <label className="flex items-center">
-                        <input type="checkbox" name="isVegetarian" onChange={handleCheckboxChange} className="checkbox" />
-                        <span className="ml-2 text-gray-600">Are you a Vegetarian/Vegan Kitchen?</span>
-                    </label>
+                    
                 </div>
 
                 <h3 className="text-lg font-semibold text-gray-600 mt-6">Operating Hours</h3>
@@ -136,49 +150,24 @@ function AddAdmin() {
                 </div>
             </section>
 
-            <section>
-                <h2 className="text-xl font-semibold text-gray-700">3. Certifications and Licenses</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <label className="flex items-center">
-                        <input type="checkbox" name="certifications.foodSafety" onChange={handleCheckboxChange} className="checkbox" />
-                        <span className="ml-2 text-gray-600">Food Safety Certification</span>
-                    </label>
-                    <label className="flex items-center">
-                        <input type="checkbox" name="certifications.healthDepartment" onChange={handleCheckboxChange} className="checkbox" />
-                        <span className="ml-2 text-gray-600">Health Department License</span>
-                    </label>
-                    <input type="file" name="certificationsFile" onChange={handleFileChange} className="file-input" />
-                </div>
-            </section>
+            
 
             <section>
                 <h2 className="text-xl font-semibold text-gray-700">4. Payment Details</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <input type="text" name="bankDetails.bankName" placeholder="Bank Name" onChange={handleChange} className="input" />
-                    <input type="text" name="bankDetails.accountHolderName" placeholder="Account Holder's Name" onChange={handleChange} className="input" />
                     <input type="text" name="bankDetails.accountNumber" placeholder="Account Number" onChange={handleChange} className="input" />
-                    <input type="text" name="bankDetails.ifscCode" placeholder="IFSC Code / SWIFT Code" onChange={handleChange} className="input" />
                 </div>
             </section>
 
-            <section>
-                <h2 className="text-xl font-semibold text-gray-700">5. Menu and Pricing</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <input type="file" name="menuFile" onChange={handleFileChange} className="file-input" />
-                    <input type="text" name="specialtyDishes[0]" placeholder="Specialty Dish 1" onChange={handleChange} className="input" />
-                    <input type="text" name="specialtyDishes[1]" placeholder="Specialty Dish 2" onChange={handleChange} className="input" />
-                    <input type="text" name="specialtyDishes[2]" placeholder="Specialty Dish 3" onChange={handleChange} className="input" />
-                    <input type="text" name="averagePricePerDish" placeholder="Average Price per Dish" onChange={handleChange} className="input" />
-                    <input type="text" name="discounts" placeholder="Discounts or Offers (if any)" onChange={handleChange} className="input" />
-                </div>
-            </section>
+            
 
         
 
             <section>
                 <h2 className="text-xl font-semibold text-gray-700">6. Terms and Conditions</h2>
                 <label className="flex items-center mt-4">
-                    <input type="checkbox" name="termsAccepted" onChange={handleCheckboxChange} className="checkbox" />
+                    
                     <span className="ml-2 text-gray-600">I agree to the terms and conditions of the food servicing app.</span>
                 </label>
             </section>
